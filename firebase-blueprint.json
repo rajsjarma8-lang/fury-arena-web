@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "isAdmin": { "type": "boolean" },
+        "coins": { "type": "number" },
+        "diamonds": { "type": "number" },
+        "country": { "type": "string", "enum": ["IN", "ID"] },
+        "permanent_location": { "type": "string" },
+        "countryLocked": { "type": "boolean" }
+      },
+      "required": ["id", "email"]
+    },
+    "RedeemCard": {
+      "title": "RedeemCard",
+      "description": "Redeemable reward card",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "amount": { "type": "number" },
+        "diamonds": { "type": "number" },
+        "targetCountry": { "type": "string", "enum": ["IN", "ID", "BOTH"] }
+      },
+      "required": ["imageUrl", "amount", "diamonds", "targetCountry"]
+    },
+    "RedeemOrder": {
+      "title": "RedeemOrder",
+      "description": "User redeem request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "amount": { "type": "number" },
+        "cost": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Completed", "Cancelled", "Rejected"] },
+        "redeem_code": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "country": { "type": "string", "enum": ["IN", "ID"] },
+        "countryFlag": { "type": "string" },
+        "permanent_location": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["userId", "userName", "amount", "cost", "status", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/redeemStore/{cardId}": {
+      "schema": "RedeemCard",
+      "description": "Redeem store items"
+    },
+    "/redeem_requests/{requestId}": {
+      "schema": "RedeemOrder",
+      "description": "User redeem requests"
+    }
+  }
+}

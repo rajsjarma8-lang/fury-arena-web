@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true ||
+         request.auth.token.email == "rajsjarma8@gmail.com");
+    }
+
+    // User Rules
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      
+      allow create: if isOwner(userId);
+      
+      allow update: if isOwner(userId) && (
+        // If country is not locked, allow setting it
+        (!resource.data.keys().hasAll(['countryLocked']) || resource.data.countryLocked == false) ||
+        // If country is locked, ensure country and countryLocked are not modified
+        (resource.data.countryLocked == true && 
+         request.resource.data.country == resource.data.country && 
+         request.resource.data.countryLocked == resource.data.countryLocked)
+      ) || isAdmin();
+    }
+
+    // Redeem Store Rules
+    match /redeemStore/{cardId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Tournaments Rules
+    match /tournaments/{tournamentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Notifications Rules
+    match /notifications/{notifId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Settings Rules
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Audience Players Rules
+    match /audience_players/{playerId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Messages Rules
+    match /messages/{messageId} {
+      allow read: if isAuthenticated() && (request.auth.uid == resource.data.userId || isAdmin());
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // Redeem Requests Rules
+    match /redeem_requests/{requestId} {
+      allow read: if isAuthenticated() && (request.auth.uid == resource.data.userId || isAdmin());
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+  }
+}
