@@ -1,7 +1,0 @@
-{
-  "name": "Fury Arena",
-  "description": "A comprehensive Free Fire tournament platform with squad and solo entry systems, admin management, and YouTube integration.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}
