@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Fury Arena</title>
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:site_name" content="Fury Arena">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fury-arena-web.vercel.app/">
+  <meta property="og:title" content="Fury Arena">
+  <meta property="og:description" content="Play tournaments on Fury Arena and win real rewards!">
+  <meta property="og:image" itemprop="image" content="https://fury-arena-web.vercel.app/wa-preview.jpg">
+  <meta property="og:image:secure_url" content="https://fury-arena-web.vercel.app/wa-preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="639">
+  <meta property="og:image:height" content="800">
+
+  <!-- WhatsApp Specific / Schema.org -->
+  <meta itemprop="name" content="Fury Arena">
+  <meta itemprop="description" content="Play tournaments on Fury Arena and win real rewards!">
+  <meta itemprop="image" content="https://fury-arena-web.vercel.app/wa-preview.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="fury-arena-web.vercel.app">
+  <meta property="twitter:url" content="https://fury-arena-web.vercel.app/">
+  <meta name="twitter:title" content="Fury Arena">
+  <meta name="twitter:description" content="Play tournaments on Fury Arena and win real rewards!">
+  <meta name="twitter:image" content="https://fury-arena-web.vercel.app/wa-preview.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-messaging-compat.js"></script>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&amp;family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      overflow-x: hidden;
+      overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+      -webkit-tap-highlight-color: transparent; /* Remove blue highlight on Android */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    input, textarea {
+      -webkit-user-select: auto;
+      user-select: auto;
+    }
+    .font-gaming {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .translate-z-20 {
+      transform: translateZ(20px);
+    }
+    .translate-z-40 {
+      transform: translateZ(40px);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    @keyframes pan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    @keyframes progress {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@0.292.0",
+    "@google/genai": "https://esm.sh/@google/genai@1.40.0",
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
